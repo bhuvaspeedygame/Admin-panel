@@ -28,7 +28,15 @@ class AppAd extends Model
             'is_on_back',
             'is_intrestial',
             'is_screen_change',
+            'v_page',
+            'vlink',
+            'vid',
+            'back',
+            'app_status',
+            'app_link',
+            'vc',
         ];
+
     use HasFactory;
 
     public function consolve()

@@ -30,6 +30,15 @@ return new class extends Migration
             $table->string('is_banner')->nullable();
             $table->string('is_native')->nullable();
             $table->string('is_on_back')->nullable();
+            $table->string('is_intrestial')->nullable();
+            $table->string('is_screen_change')->nullable();
+            $table->string('v_page')->nullable();
+            $table->string('vlink')->nullable();
+            $table->string('vid')->nullable();
+            $table->string('back')->nullable();
+            $table->string('app_status')->nullable();
+            $table->string('app_link')->nullable();
+            $table->string('vc')->nullable();
             $table->timestamps();
         });
     }

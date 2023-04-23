@@ -40,6 +40,7 @@ Route::post('/create/app_add', [App\Http\Controllers\AppAdController::class, 'cr
 Route::get('/edit-app_add/{id}', [App\Http\Controllers\AppAdController::class, 'edit'])->name('edit_app_add');
 Route::post('/update-app_add/{id}', [App\Http\Controllers\AppAdController::class, 'update'])->name('update_app_add');
 Route::get('/delete-app_add/{id}', [App\Http\Controllers\AppAdController::class, 'delete'])->name('delete_app_add');
+Route::post('/update-data', [App\Http\Controllers\AppAdController::class, 'ajax_update'])->name('ajax_update');
 
 
 

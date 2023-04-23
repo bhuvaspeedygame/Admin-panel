@@ -18,7 +18,6 @@ class AppAdController extends Controller
 
     function create(Request $request)
     {
-        dd($request);
         $validator = Validator::make($request->all(), [
             'name' => "required|min:3",
             'package_name' => 'required|',
@@ -39,41 +38,70 @@ class AppAdController extends Controller
             'is_on_back' => 'required|',
             'is_intrestial' => 'required|',
             'is_screen_change' => 'required|',
+            'v_page' => 'required|',
+            'vlink' => 'required|',
+            'vid' => 'required|',
+            'back' => 'required|',
+            'app_status' => 'required|',
+            'app_link' => 'required|',
+            'vc' => 'required|',
         ]);
 
         if ($validator->fails()) {
             $error = $validator->errors()->first();
             return redirect()->back()->with('error',$error);
         } else {
-            $appad_data = new AppAd();
-            $appad_data->name = $request->name;
-            $appad_data->package_name = $request->package_name;
-            if ($file = $request->hasFile('app_icon')) {
 
-                $file = $request->file('app_icon');
-                $fileName = $file->getClientOriginalName();
-                $destinationPath = public_path() . '/app_icon';
-                $file->move($destinationPath, $fileName);
-                $appad_data->app_icon = $fileName;
-            }
-            $appad_data->select_console = $request->select_console;
-            $appad_data->banner_id = $request->banner_id;
-            $appad_data->interstitial_id = $request->interstitial_id;
-            $appad_data->app_openid = $request->app_openid;
-            $appad_data->native_id = $request->native_id;
-            $appad_data->rewarded_id = $request->rewarded_id;
-            $appad_data->interstitial_loading = $request->interstitial_loading;
-            $appad_data->open_ad_loading = $request->open_ad_loading;
-            $appad_data->interstitial_click = $request->interstitial_click;
-            $appad_data->open_ad_click = $request->open_ad_click;
-            $appad_data->is_open_ad = $request->is_open_ad;
-            $appad_data->is_banner = $request->is_banner;
-            $appad_data->is_native = $request->is_native;
-            $appad_data->is_on_back = $request->is_on_back;
-            $appad_data->is_intrestial = $request->is_intrestial;
-            $appad_data->is_screen_change = $request->is_screen_change;
-            $appad_data->save();
-            return redirect()->back()->with('status', "AppAd Successfully Created!");
+                $data_app = AppAd::where('package_name',$request->package_name)->first();
+                if($data_app == "")
+                {
+                    $banner_id = json_encode($request->banner_id);
+                    $interstitial_id = json_encode($request->interstitial_id);
+                    $app_openid = json_encode($request->app_openid);
+                    $native_id = json_encode($request->native_id);
+                    $rewarded_id = json_encode($request->rewarded_id);
+
+                    $appad_data = new AppAd();
+                    $appad_data->name = $request->name;
+                    $appad_data->package_name = $request->package_name;
+                    if ($file = $request->hasFile('app_icon')) {
+
+                        $file = $request->file('app_icon');
+                        $fileName = $file->getClientOriginalName();
+                        $destinationPath = public_path() . '/app_icon';
+                        $file->move($destinationPath, $fileName);
+                        $appad_data->app_icon = $fileName;
+                    }
+                    $appad_data->select_console = $request->select_console;
+                    $appad_data->banner_id = $banner_id;
+                    $appad_data->interstitial_id = $interstitial_id;
+                    $appad_data->app_openid = $app_openid;
+                    $appad_data->native_id = $native_id;
+                    $appad_data->rewarded_id = $rewarded_id;
+                    $appad_data->interstitial_loading = $request->interstitial_loading;
+                    $appad_data->open_ad_loading = $request->open_ad_loading;
+                    $appad_data->interstitial_click = $request->interstitial_click;
+                    $appad_data->open_ad_click = $request->open_ad_click;
+                    $appad_data->is_open_ad = $request->is_open_ad;
+                    $appad_data->is_banner = $request->is_banner;
+                    $appad_data->is_native = $request->is_native;
+                    $appad_data->is_on_back = $request->is_on_back;
+                    $appad_data->is_intrestial = $request->is_intrestial;
+                    $appad_data->is_screen_change = $request->is_screen_change;
+                    $appad_data->v_page = $request->v_page;
+                    $appad_data->vlink = $request->vlink;
+                    $appad_data->vid = $request->vid;
+                    $appad_data->back = $request->back;
+                    $appad_data->app_status = $request->app_status;
+                    $appad_data->app_link = $request->app_link;
+                    $appad_data->vc = $request->vc;
+                    $appad_data->save();
+                    return redirect()->back()->with('status', "AppAd Successfully Created!");
+                }
+                else
+                {
+                    return redirect()->back()->with('error', "Package name already exists!");
+                }
         }
     }
 
@@ -106,11 +134,36 @@ class AppAdController extends Controller
             'is_on_back' => 'required|',
             'is_intrestial' => 'required|',
             'is_screen_change' => 'required|',
+            'v_page' => 'required|',
+            'vlink' => 'required|',
+            'vid' => 'required|',
+            'back' => 'required|',
+            'app_status' => 'required|',
+            'app_link' => 'required|',
+            'vc' => 'required|',
         ]);
         if ($validator->fails()) {
             $error = $validator->errors()->first();
             return redirect()->back()->with('error',$error);
         } else {
+            $data_banner = '["' . implode ( '","', $request->banner_id ) . '"]';
+            $data_interstitial = '["' . implode ( '","', $request->interstitial_id ) . '"]';
+            $data_app_open = '["' . implode ( '","', $request->app_openid ) . '"]';
+            $data_native = '["' . implode ( '","', $request->native_id ) . '"]';
+            $data_rewarded = '["' . implode ( '","', $request->rewarded_id ) . '"]';
+
+            $banner_id = $data_banner;
+            $interstitial_id = $data_interstitial;
+            $app_openid = $data_app_open;
+            $native_id = $data_native;
+            $rewarded_id = $data_rewarded;
+
+//            $banner_id = json_encode($request->banner_id);
+//            $interstitial_id = json_encode($request->interstitial_id);
+//            $app_openid = json_encode($request->app_openid);
+//            $native_id = json_encode($request->native_id);
+//            $rewarded_id = json_encode($request->rewarded_id);
+
             $appad_data = AppAd::find($id);
             $appad_data->name = $request->name;
             $appad_data->package_name = $request->package_name;
@@ -123,11 +176,11 @@ class AppAdController extends Controller
                 $appad_data->app_icon = $fileName;
             }
             $appad_data->select_console = $request->select_console;
-            $appad_data->banner_id = $request->banner_id;
-            $appad_data->interstitial_id = $request->interstitial_id;
-            $appad_data->app_openid = $request->app_openid;
-            $appad_data->native_id = $request->native_id;
-            $appad_data->rewarded_id = $request->rewarded_id;
+            $appad_data->banner_id = $banner_id;
+            $appad_data->interstitial_id = $interstitial_id;
+            $appad_data->app_openid = $app_openid;
+            $appad_data->native_id = $native_id;
+            $appad_data->rewarded_id = $rewarded_id;
             $appad_data->interstitial_loading = $request->interstitial_loading;
             $appad_data->open_ad_loading = $request->open_ad_loading;
             $appad_data->interstitial_click = $request->interstitial_click;
@@ -138,6 +191,13 @@ class AppAdController extends Controller
             $appad_data->is_on_back = $request->is_on_back;
             $appad_data->is_intrestial = $request->is_intrestial;
             $appad_data->is_screen_change = $request->is_screen_change;
+            $appad_data->v_page = $request->v_page;
+            $appad_data->vlink = $request->vlink;
+            $appad_data->vid = $request->vid;
+            $appad_data->back = $request->back;
+            $appad_data->app_status = $request->app_status;
+            $appad_data->app_link = $request->app_link;
+            $appad_data->vc = $request->vc;
             $appad_data->update();
 
             return back()->with("status", "AppAd Successfully Updated!");
@@ -149,5 +209,10 @@ class AppAdController extends Controller
         $appad_delete = AppAd::find($id);
         $appad_delete->delete();
         return back()->with("status", "AppAd Delete successfully");
+    }
+
+    function ajax_update(Request $request)
+    {
+        dd($request);
     }
 }

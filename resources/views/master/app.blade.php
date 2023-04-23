@@ -65,6 +65,8 @@
 
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
+
+
 <!-- Vendor JS Files -->
 <script src="{{asset('assets/vendor/apexcharts/apexcharts.min.js')}}"></script>
 <script src="{{asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
@@ -112,7 +114,209 @@
 
 </script>
 
+<script type="text/javascript">
+    var a = 0;
+    var b = 0;
+    var c = 0;
+    var d = 0;
+    var e = 0;
 
+    $("#dynamic-ar").click(function () {
+        ++a;
+        $("#dynamicAddRemove").append('<tr><td><input type="text" name="banner_id[' + a +
+            ']" placeholder="Enter subject" class="form-control"/></td><td><button type="button" class="btn btn-outline-danger remove-input-field"> - </button></td></tr>'
+        );
+    });
+
+    $("#interstitial").click(function () {
+        ++b;
+        $("#interstitial_id").append('<tr><td><input type="text" name="interstitial_id[' + b +
+            ']" placeholder="Enter Interstitial Id" class="form-control mt-1" /></td><td><button type="button" class="btn btn-outline-danger remove-input-field"> - </button></td></tr>'
+        );
+    });
+
+    $("#app_open").click(function () {
+        ++c;
+        $("#app_openid").append('<tr><td><input type="text" name="app_openid[' + c +
+            ']" placeholder="Enter App Open Id" class="form-control mt-1" /></td><td><button type="button" class="btn btn-outline-danger remove-input-field"> - </button></td></tr>'
+        );
+    });
+
+    $("#native").click(function () {
+        ++d;
+        $("#native_id").append('<tr><td><input type="text" name="native_id[' + d +
+            ']" placeholder="Enter Native Id" class="form-control mt-1" /></td><td><button type="button" class="btn btn-outline-danger remove-input-field"> - </button></td></tr>'
+        );
+    });
+
+    $("#rewarded").click(function () {
+        ++e;
+        $("#rewarded_id").append('<tr><td><input type="text" name="rewarded_id[' + e +
+            ']" placeholder="Enter Rewarded Id" class="form-control mt-1" /></td><td><button type="button" class="btn btn-outline-danger remove-input-field"> - </button></td></tr>'
+        );
+    });
+
+
+    $(document).on('click', '.remove-input-field', function () {
+        $(this).parents('tr').remove();
+    });
+</script>
+
+<script type="text/javascript">
+
+
+    // banner_id start
+
+    var banner_id = $("#hidden_banner_id").val();
+    var trainindIdArray = banner_id.split(',');
+
+    for (var i = 0; i < trainindIdArray.length; i++) {
+        trainindIdArray[i] = trainindIdArray[i].replace("[", "");
+        trainindIdArray[i] = trainindIdArray[i].replace("]", "");
+        trainindIdArray[i] = trainindIdArray[i].replace('"', "");
+        trainindIdArray[i] = trainindIdArray[i].replace('"', "");
+        trainindIdArray[i] = trainindIdArray[i].replace("\\", "");
+    }
+
+    $.each(trainindIdArray , function(index, val) {
+        $("#update_dynamicAddRemove").append('<tr><td><input type="text" name="banner_id[' + index +
+            ']" placeholder="Enter subject" class="form-control" value="'+ val +'"/></td><td><button type="button" class="btn btn-outline-danger remove-input-field"> - </button></td></tr>'
+        );
+    });
+    $("#update_dynamic-ar").click(function () {
+        var length = trainindIdArray.length;
+        ++length;
+        $("#update_dynamicAddRemove").append('<tr><td><input type="text" name="banner_id[' + length +
+            ']" placeholder="Enter subject" class="form-control"/></td><td><button type="button" class="btn btn-outline-danger remove-input-field"> - </button></td></tr>'
+        );
+    });
+
+    // banner_id end
+
+
+
+    // interstitial_id start
+
+    var interstitial_id = $("#hidden_interstitial_id").val();
+    var interstitial = interstitial_id.split(',');
+
+    for (var i = 0; i < interstitial.length; i++) {
+        interstitial[i] = interstitial[i].replace("[", "");
+        interstitial[i] = interstitial[i].replace("]", "");
+        interstitial[i] = interstitial[i].replace('"', "");
+        interstitial[i] = interstitial[i].replace('"', "");
+        interstitial[i] = interstitial[i].replace("\\", "");
+    }
+
+    $.each(interstitial , function(index, val) {
+        $("#update_interstitial_id").append('<tr><td><input type="text" name="interstitial_id[' + index +
+            ']" placeholder="Enter Interstitial Id" class="form-control" value="'+ val +'"/></td><td><button type="button" class="btn btn-outline-danger remove-input-field"> - </button></td></tr>'
+        );
+    });
+    $("#update_interstitial").click(function () {
+        var length = interstitial.length;
+        ++length;
+        $("#update_interstitial_id").append('<tr><td><input type="text" name="interstitial_id[' + length +
+            ']" placeholder="Enter Interstitial Id" class="form-control"/></td><td><button type="button" class="btn btn-outline-danger remove-input-field"> - </button></td></tr>'
+        );
+    });
+
+    // interstitial_id end
+
+
+    // app_openid_id start
+
+    var app_openid_id = $("#hidden_app_openid").val();
+    var openid = app_openid_id.split(',');
+
+    for (var i = 0; i < openid.length; i++) {
+        openid[i] = openid[i].replace("[", "");
+        openid[i] = openid[i].replace("]", "");
+        openid[i] = openid[i].replace('"', "");
+        openid[i] = openid[i].replace('"', "");
+        openid[i] = openid[i].replace("\\", "");
+    }
+
+    $.each(openid , function(index, val) {
+        $("#update_app_openid").append('<tr><td><input type="text" name="app_openid[' + index +
+            ']" placeholder="Enter App Open Id" class="form-control" value="'+ val +'"/></td><td><button type="button" class="btn btn-outline-danger remove-input-field"> - </button></td></tr>'
+        );
+    });
+
+    $("#update_app_open").click(function () {
+        var length = openid.length;
+        ++length;
+        $("#update_app_openid").append('<tr><td><input type="text" name="app_openid[' + length +
+            ']" placeholder="Enter App Open Id" class="form-control"/></td><td><button type="button" class="btn btn-outline-danger remove-input-field"> - </button></td></tr>'
+        );
+    });
+
+    // app_openid_id end
+
+
+    // native_id start
+
+    var native_id = $("#hidden_native_id").val();
+    var native = native_id.split(',');
+
+    for (var i = 0; i < native.length; i++) {
+        native[i] = native[i].replace("[", "");
+        native[i] = native[i].replace("]", "");
+        native[i] = native[i].replace('"', "");
+        native[i] = native[i].replace('"', "");
+        native[i] = native[i].replace("\\", "");
+    }
+
+    $.each(native , function(index, val) {
+        $("#update_native_id").append('<tr><td><input type="text" name="native_id[' + index +
+            ']" placeholder="Enter Interstitial Id" class="form-control" value="'+ val +'"/></td><td><button type="button" class="btn btn-outline-danger remove-input-field"> - </button></td></tr>'
+        );
+    });
+
+    $("#update_native").click(function () {
+        var length = native.length;
+        ++length;
+        $("#update_native_id").append('<tr><td><input type="text" name="native_id[' + length +
+            ']" placeholder="Enter Native Id" class="form-control"/></td><td><button type="button" class="btn btn-outline-danger remove-input-field"> - </button></td></tr>'
+        );
+    });
+
+    // native_id end
+
+    // rewarded_id start
+
+    var rewarded_id = $("#hidden_rewarded_id").val();
+    var rewarded = rewarded_id.split(',');
+
+    for (var i = 0; i < rewarded.length; i++) {
+        rewarded[i] = rewarded[i].replace("[", "");
+        rewarded[i] = rewarded[i].replace("]", "");
+        rewarded[i] = rewarded[i].replace('"', "");
+        rewarded[i] = rewarded[i].replace('"', "");
+        rewarded[i] = rewarded[i].replace("\\", "");
+    }
+
+    $.each(rewarded , function(index, val) {
+        $("#update_rewarded_id").append('<tr><td><input type="text" name="rewarded_id[' + index +
+            ']" placeholder="Enter Interstitial Id" class="form-control" value="'+ val +'"/></td><td><button type="button" class="btn btn-outline-danger remove-input-field"> - </button></td></tr>'
+        );
+    });
+
+    $("#update_rewarded").click(function () {
+        var length = rewarded.length;
+        ++length;
+        $("#update_rewarded_id").append('<tr><td><input type="text" name="rewarded_id[' + length +
+            ']" placeholder="Enter Rewarded Id" class="form-control"/></td><td><button type="button" class="btn btn-outline-danger remove-input-field"> - </button></td></tr>'
+        );
+    });
+
+    // rewarded_id end
+
+
+    $(document).on('click', '.remove-input-field', function () {
+        $(this).parents('tr').remove();
+    });
+</script>
 
 </body>
 

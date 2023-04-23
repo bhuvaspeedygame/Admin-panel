@@ -55,26 +55,91 @@
                                 <div class="card-header">
                                     <h2>Ads</h2>
                                 </div>
+                                @php
+                                    $banner_data = explode(",",$appad_data->banner_id);
+                                    $banner_data_id = str_replace(['[','"',']'] ,"",$banner_data);
+
+                                    $interstitial_data = explode(",",$appad_data->interstitial_id);
+                                    $interstitial_data_id = str_replace(['[','"',']'] ,"",$interstitial_data);
+
+                                    $app_open_data = explode(",",$appad_data->app_openid);
+                                    $app_open_data_id = str_replace(['[','"',']'] ,"",$app_open_data);
+
+                                    $native_data = explode(",",$appad_data->native_id);
+                                    $native_data_id = str_replace(['[','"',']'] ,"",$native_data);
+
+                                    $rewarded_data = explode(",",$appad_data->rewarded_id);
+                                    $rewarded_data_id = str_replace(['[','"',']'] ,"",$rewarded_data);
+                                @endphp
+
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Banner Id<span style="color: red"> *</span></label>
-                                    <input type="text" class="form-control" id="banner_id"  name="banner_id" placeholder="Enter Banner Id" value="{{$appad_data->banner_id}}">
+                                    <input type="hidden" id="hidden_banner_id" value="{{$appad_data->banner_id}}">
+{{--                                    @foreach($banner_data_id as $k => $data_banner_data)--}}
+{{--                                        @if(!empty($data_banner_data))--}}
+{{--                                            <input type="text" name="banner_id[{{$k}}]" placeholder="Enter Banner Id" id="banner_id" class="form-control mt-1" value="{{$data_banner_data}}"/>--}}
+{{--                                        @endif--}}
+{{--                                    @endforeach--}}
+                                    <div id="update_dynamicAddRemove"></div>
+                                    <button type="button" name="add" id="update_dynamic-ar" value="add" class="btn btn-outline-primary mt-1">+</button>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Interstitial Id<span style="color: red"> *</span></label>
-                                    <input type="text" class="form-control" id="interstitial_id"  name="interstitial_id" placeholder="Enter Interstitial Id" value="{{$appad_data->interstitial_id}}">
+                                    <input type="hidden" id="hidden_interstitial_id" value="{{$appad_data->interstitial_id}}">
+{{--                                    @foreach($interstitial_data_id as $k=>$data_banner_data)--}}
+{{--                                        <input type="text" name="interstitial_id[{{$k}}]" placeholder="Enter Interstitial Id" class="form-control mt-1" value="{{$data_banner_data}}"/>--}}
+{{--                                    @endforeach--}}
+                                    <div id="update_interstitial_id"></div>
+                                    <button type="button" name="interstitial_id" id="update_interstitial" value="add" class="btn btn-outline-primary mt-1">+</button>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">App Openid<span style="color: red"> *</span></label>
-                                    <input type="text" class="form-control" id="app_openid"  name="app_openid" placeholder="Enter App Openid" value="{{$appad_data->app_openid}}">
+                                    <input type="hidden" id="hidden_app_openid" value="{{$appad_data->app_openid}}">
+{{--                                    @foreach($app_open_data_id as $k=>$data_banner_data)--}}
+{{--                                    <input type="text" name="app_openid[{{$k}}]" placeholder="Enter App Open Id" class="form-control mt-1" value="{{$data_banner_data}}"/>--}}
+{{--                                    @endforeach--}}
+                                    <div id="update_app_openid"></div>
+                                    <button type="button" name="app_openid" id="update_app_open" value="add" class="btn btn-outline-primary mt-1">+</button>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Native Id<span style="color: red"> *</span></label>
-                                    <input type="text" class="form-control" id="native_id"  name="native_id" placeholder="Enter Native Id" value="{{$appad_data->native_id}}">
+                                    <input type="hidden" id="hidden_native_id" value="{{$appad_data->native_id}}">
+{{--                                    @foreach($native_data_id as $k=>$data_banner_data)--}}
+{{--                                    <input type="text" name="native_id[{{$k}}]" placeholder="Enter Native Id" class="form-control mt-1" value="{{$data_banner_data}}"/>--}}
+{{--                                    @endforeach--}}
+                                    <div id="update_native_id"></div>
+                                    <button type="button" name="native_id" id="update_native" value="add" class="btn btn-outline-primary mt-1">+</button>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Rewarded Id<span style="color: red"> *</span></label>
-                                    <input type="text" class="form-control" id="rewarded_id"  name="rewarded_id" placeholder="Enter Rewarded Id" value="{{$appad_data->rewarded_id}}">
+                                    <input type="hidden" id="hidden_rewarded_id" value="{{$appad_data->rewarded_id}}">
+{{--                                    @foreach($rewarded_data_id as $k=>$data_banner_data)--}}
+{{--                                    <input type="text" name="rewarded_id[{{$k}}]" placeholder="Enter Rewarded Id" class="form-control mt-1" value="{{$data_banner_data}}"/>--}}
+{{--                                    @endforeach--}}
+                                    <div id="update_rewarded_id"></div>
+                                    <button type="button" name="rewarded_id" id="update_rewarded" value="add" class="btn btn-outline-primary mt-1">+</button>
                                 </div>
+
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="exampleInputEmail1">Banner Id<span style="color: red"> *</span></label>--}}
+{{--                                    <input type="text" class="form-control" id="banner_id"  name="banner_id" placeholder="Enter Banner Id" value="{{$appad_data->banner_id}}">--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="exampleInputEmail1">Interstitial Id<span style="color: red"> *</span></label>--}}
+{{--                                    <input type="text" class="form-control" id="interstitial_id"  name="interstitial_id" placeholder="Enter Interstitial Id" value="{{$appad_data->interstitial_id}}">--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="exampleInputEmail1">App Openid<span style="color: red"> *</span></label>--}}
+{{--                                    <input type="text" class="form-control" id="app_openid"  name="app_openid" placeholder="Enter App Openid" value="{{$appad_data->app_openid}}">--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="exampleInputEmail1">Native Id<span style="color: red"> *</span></label>--}}
+{{--                                    <input type="text" class="form-control" id="native_id"  name="native_id" placeholder="Enter Native Id" value="{{$appad_data->native_id}}">--}}
+{{--                                </div>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <label for="exampleInputEmail1">Rewarded Id<span style="color: red"> *</span></label>--}}
+{{--                                    <input type="text" class="form-control" id="rewarded_id"  name="rewarded_id" placeholder="Enter Rewarded Id" value="{{$appad_data->rewarded_id}}">--}}
+{{--                                </div>--}}
 
 
                                 <hr>
@@ -131,46 +196,37 @@
                                     <input type="radio" name="is_screen_change" value="1" {{($appad_data->is_screen_change == "1")?"checked":""}}> True
                                     <input type="radio" name="is_screen_change" value="0" {{($appad_data->is_screen_change == "0")?"checked":""}}> False <br/>
                                 </div>
-{{--                                <div class="form-group">--}}
-{{--                                    <label for="exampleInputEmail1">Interstitial Loading</label>--}}
-{{--                                    <input type="text" class="form-control" id="interstitial_loading"  name="interstitial_loading" placeholder="Enter Interstitial Loading" value="{{$appad_data->interstitial_loading}}">--}}
-{{--                                </div>--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label for="exampleInputEmail1">Open Ad Loading</label>--}}
-{{--                                    <input type="text" class="form-control" id="open_ad_loading"  name="open_ad_loading" placeholder="Enter Open Ad Loading" value="{{$appad_data->open_ad_loading}}">--}}
-{{--                                </div>--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label for="exampleInputEmail1">Interstitial Click</label>--}}
-{{--                                    <input type="text" class="form-control" id="interstitial_click"  name="interstitial_click" placeholder="Enter Interstitial Click" value="{{$appad_data->interstitial_click}}">--}}
-{{--                                </div>--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label for="exampleInputEmail1">Open Ad Click</label>--}}
-{{--                                    <input type="text" class="form-control" id="open_ad_click"  name="open_ad_click" placeholder="Enter Open Ad Click" value="{{$appad_data->open_ad_click}}">--}}
-{{--                                </div>--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label for="exampleInputEmail1">Is Open Ad</label>--}}
-{{--                                    <input type="text" class="form-control" id="is_open_ad"  name="is_open_ad" placeholder="Enter Is Open Ad" value="{{$appad_data->is_open_ad}}">--}}
-{{--                                </div>--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label for="exampleInputEmail1">Is Banner</label>--}}
-{{--                                    <input type="text" class="form-control" id="is_banner"  name="is_banner" placeholder="Enter Is Banner" value="{{$appad_data->is_banner}}">--}}
-{{--                                </div>--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label for="exampleInputEmail1">Is Native</label>--}}
-{{--                                    <input type="text" class="form-control" id="is_native"  name="is_native" placeholder="Enter Is Native" value="{{$appad_data->is_native}}">--}}
-{{--                                </div>--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label for="exampleInputEmail1">Is On Back</label>--}}
-{{--                                    <input type="text" class="form-control" id="is_on_back"  name="is_on_back" placeholder="Enter Is On Back" value="{{$appad_data->is_on_back}}">--}}
-{{--                                </div>--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label for="exampleInputEmail1">Is Intrestial</label>--}}
-{{--                                    <input type="text" class="form-control" id="is_intrestial"  name="is_intrestial" placeholder="Enter Is Intrestial" value="{{$appad_data->is_intrestial}}">--}}
-{{--                                </div>--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label for="exampleInputEmail1">Is Screen Change</label>--}}
-{{--                                    <input type="text" class="form-control" id="is_screen_change"  name="is_screen_change" placeholder="Enter Is Screen Change" value="{{$appad_data->is_screen_change}}">--}}
-{{--                                </div>--}}
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">V page<span style="color: red"> *</span></label><br>&nbsp
+                                    <input type="radio" name="v_page" value="1" {{($appad_data->v_page == "1")?"checked":""}}> True
+                                    <input type="radio" name="v_page" value="0" {{($appad_data->v_page == "0")?"checked":""}}> False <br/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">V link<span style="color: red"> *</span></label>
+                                    <input type="text" name="vlink" class="form-control" id="vlink" value="{{$appad_data->vlink}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">V Id<span style="color: red"> *</span></label>
+                                    <input type="text" name="vid" class="form-control" id="vid" value="{{$appad_data->vid}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Back<span style="color: red"> *</span></label><br>&nbsp
+                                    <input type="radio" name="back" value="1" {{($appad_data->back == "1")?"checked":""}}> True
+                                    <input type="radio" name="back" value="0" {{($appad_data->back == "0")?"checked":""}}> False <br/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">App Status<span style="color: red"> *</span></label><br>&nbsp
+                                    <input type="radio" name="app_status" value="1" {{($appad_data->app_status == "1")?"checked":""}}> True
+                                    <input type="radio" name="app_status" value="0" {{($appad_data->app_status == "0")?"checked":""}}> False <br/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">App Link<span style="color: red"> *</span></label>
+                                    <input type="text" name="app_link" class="form-control" id="app_link" value="{{$appad_data->app_link}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Vc<span style="color: red"> *</span></label>
+                                    <input type="text" name="vc" class="form-control" id="vc" value="{{$appad_data->vc}}">
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" id="Add_app_ad"  name="Add_app_ad" class="btn btn-primary">Save</button value={{$appad_data->Add_app_ad}}"">

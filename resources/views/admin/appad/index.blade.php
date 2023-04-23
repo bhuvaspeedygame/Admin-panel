@@ -30,6 +30,7 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Name</th>
+                                <th scope="col">Package Name</th>
                                 <th scope="col">App Icon</th>
                                 <th scope="col">Console Name</th>
                                 <th scope="col">Created At</th>
@@ -41,11 +42,13 @@
                                 <tr>
                                     <th scope="row">{{$k+1}}</th>
                                     <td>{{$data->name}}</td>
+                                    <td>{{$data->package_name}}</td>
                                     <td><img src="{{asset('app_icon/'.$data->app_icon)}}" alt="profile Pic" height="100" width="100" style="border-radius: 10px"></td>
                                     <td>{{$data->consolve->name}}</td>
                                     <td>{{date('d-m-Y', strtotime($data->created_at))}}</td>
                                     <td>
-                                        <a href="{{ url('edit-app_add/'.$data->id) }}" class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></a>
+                                        <a href="{{ url('edit-app_add/'.$data->id) }}" class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" id="btnEdit" data-id="{{$data->id}}" title="Edit"><i class="fa fa-edit"></i></a>
+{{--                                        <a href="#" class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" id="btnEdit" data-id="{{$data->id}}" title="Edit"><i class="fa fa-edit"></i></a>--}}
                                         <a href="{{ url('delete-app_add/'.$data->id) }}" class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
@@ -95,26 +98,60 @@
                             <div class="card-header">
                                 <h2>Ads</h2>
                             </div>
+
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Banner Id<span style="color: red"> *</span></label>
-                                <input type="text" class="form-control" id="banner_id"  name="banner_id" placeholder="Enter Banner Id">
+                                <input type="text" name="banner_id[0]" placeholder="Enter Banner Id" class="form-control" />
+                                <div id="dynamicAddRemove"></div>
+                                <button type="button" name="add" id="dynamic-ar" class="btn btn-outline-primary mt-1">+</button>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Interstitial Id<span style="color: red"> *</span></label>
-                                <input type="text" class="form-control" id="interstitial_id"  name="interstitial_id" placeholder="Enter Interstitial Id">
+                                <input type="text" name="interstitial_id[0]" placeholder="Enter Interstitial Id" class="form-control" />
+                                <div id="interstitial_id"></div>
+                                <button type="button" name="interstitial_id" id="interstitial" class="btn btn-outline-primary mt-1">+</button>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">App Openid<span style="color: red"> *</span></label>
-                                <input type="text" class="form-control" id="app_openid"  name="app_openid" placeholder="Enter App Openid">
+                                <input type="text" name="app_openid[0]" placeholder="Enter App Open Id" class="form-control" />
+                                <div id="app_openid"></div>
+                                <button type="button" name="app_openid" id="app_open" class="btn btn-outline-primary mt-1">+</button>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Native Id<span style="color: red"> *</span></label>
-                                <input type="text" class="form-control" id="native_id"  name="native_id" placeholder="Enter Native Id">
+                                <input type="text" name="native_id[0]" placeholder="Enter Native Id" class="form-control" />
+                                <div id="native_id"></div>
+                                <button type="button" name="native_id" id="native" class="btn btn-outline-primary mt-1">+</button>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Rewarded Id<span style="color: red"> *</span></label>
-                                <input type="text" class="form-control" id="rewarded_id"  name="rewarded_id" placeholder="Enter Rewarded Id">
+                                <input type="text" name="rewarded_id[0]" placeholder="Enter Rewarded Id" class="form-control" />
+                                <div id="rewarded_id"></div>
+                                <button type="button" name="rewarded_id" id="rewarded" class="btn btn-outline-primary mt-1">+</button>
                             </div>
+
+
+
+{{--                            <div class="form-group">--}}
+{{--                                <label for="exampleInputEmail1">Banner Id<span style="color: red"> *</span></label>--}}
+{{--                                <input type="text" class="form-control" id="banner_id"  name="banner_id" placeholder="Enter Banner Id">--}}
+{{--                            </div>--}}
+{{--                            <div class="form-group">--}}
+{{--                                <label for="exampleInputEmail1">Interstitial Id<span style="color: red"> *</span></label>--}}
+{{--                                <input type="text" class="form-control" id="interstitial_id"  name="interstitial_id" placeholder="Enter Interstitial Id">--}}
+{{--                            </div>--}}
+{{--                            <div class="form-group">--}}
+{{--                                <label for="exampleInputEmail1">App Openid<span style="color: red"> *</span></label>--}}
+{{--                                <input type="text" class="form-control" id="app_openid"  name="app_openid" placeholder="Enter App Openid">--}}
+{{--                            </div>--}}
+{{--                            <div class="form-group">--}}
+{{--                                <label for="exampleInputEmail1">Native Id<span style="color: red"> *</span></label>--}}
+{{--                                <input type="text" class="form-control" id="native_id"  name="native_id" placeholder="Enter Native Id">--}}
+{{--                            </div>--}}
+{{--                            <div class="form-group">--}}
+{{--                                <label for="exampleInputEmail1">Rewarded Id<span style="color: red"> *</span></label>--}}
+{{--                                <input type="text" class="form-control" id="rewarded_id"  name="rewarded_id" placeholder="Enter Rewarded Id">--}}
+{{--                            </div>--}}
 
 
                             <hr>
@@ -171,6 +208,37 @@
                                 <label for="exampleInputEmail1">Is Screen Change<span style="color: red"> *</span></label><br>&nbsp
                                 <input type="radio" name="is_screen_change" value="1"> True
                                 <input type="radio" name="is_screen_change" value="0"> False <br/>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">V page<span style="color: red"> *</span></label><br>&nbsp
+                                <input type="radio" name="v_page" value="1"> True
+                                <input type="radio" name="v_page" value="0"> False <br/>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">V link<span style="color: red"> *</span></label>
+                                <input type="text" name="vlink" id="vlink" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">V Id<span style="color: red"> *</span></label>
+                                <input type="text" name="vid" id="vid" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Back<span style="color: red"> *</span></label><br>&nbsp
+                                <input type="radio" name="back" value="1"> True
+                                <input type="radio" name="back" value="0"> False <br/>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">App Status<span style="color: red"> *</span></label><br>&nbsp
+                                <input type="radio" name="app_status" value="1"> True
+                                <input type="radio" name="app_status" value="0"> False <br/>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">App Link<span style="color: red"> *</span></label>
+                                <input type="text" name="app_link" id="app_link" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Vc<span style="color: red"> *</span></label>
+                                <input type="text" name="vc" id="vc" class="form-control">
                             </div>
 
 {{--                            <div class="form-group form-check form-switch">--}}
