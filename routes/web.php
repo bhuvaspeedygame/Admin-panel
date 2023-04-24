@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/ ', function () {
+    return redirect('home');
 });
 
 \Illuminate\Support\Facades\Auth::routes();
@@ -43,14 +43,17 @@ Route::get('/delete-app_add/{id}', [App\Http\Controllers\AppAdController::class,
 Route::post('/update-data', [App\Http\Controllers\AppAdController::class, 'ajax_update'])->name('ajax_update');
 
 
-
-
-
 //pages
 Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('user_profile');
 Route::post('/add_profile', [App\Http\Controllers\ProfileController::class, 'edit'])->name('edit_profile');
 Route::post('/change-password', [App\Http\Controllers\ProfileController::class, 'updatePassword'])->name('update-password');
 
 
+//User Log
+
+Route::get('/user_log', [App\Http\Controllers\UserLogController::class, 'index'])->name('user_log');
+
+
 //Contact
 Route::get('/contact', [App\Http\Controllers\ContactController::class, 'contact'])->name('contact');
+

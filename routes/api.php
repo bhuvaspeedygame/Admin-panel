@@ -24,3 +24,6 @@ Route::get('/home', [App\Http\Controllers\ApiController::class, 'home']);
 
 // single blog data
 Route::post('/package_name', [App\Http\Controllers\ApiController::class, 'app_package']);
+
+// total user
+Route::post('/total_user', [App\Http\Controllers\ApiController::class, 'total_user']);

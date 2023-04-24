@@ -33,6 +33,7 @@
                                 <th scope="col">Package Name</th>
                                 <th scope="col">App Icon</th>
                                 <th scope="col">Console Name</th>
+                                <th scope="col">Total User</th>
                                 <th scope="col">Created At</th>
                                 <th scope="col">Action</th>
                             </tr>
@@ -45,6 +46,7 @@
                                     <td>{{$data->package_name}}</td>
                                     <td><img src="{{asset('app_icon/'.$data->app_icon)}}" alt="profile Pic" height="100" width="100" style="border-radius: 10px"></td>
                                     <td>{{$data->consolve->name}}</td>
+                                    <td><a href="{{route('user_log',['id' => $data->id])}}" id="user_log">{{$data->total_user}}</a></td>
                                     <td>{{date('d-m-Y', strtotime($data->created_at))}}</td>
                                     <td>
                                         <a href="{{ url('edit-app_add/'.$data->id) }}" class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" id="btnEdit" data-id="{{$data->id}}" title="Edit"><i class="fa fa-edit"></i></a>

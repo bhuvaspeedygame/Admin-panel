@@ -31,6 +31,17 @@
         </li>
         <!-- End App Ad -->
 
+
+        <!-- Start User Report -->
+        <li class="nav-item">
+                <a class="nav-link" href="{{route('user_log')}}">
+                <i class="fa fa-file"></i>
+                <span>User Report</span>
+            </a>
+        </li>
+        <!-- End User Report -->
+
+
         <!-- Start Category -->
 
 {{--        <li class="nav-item">--}}
